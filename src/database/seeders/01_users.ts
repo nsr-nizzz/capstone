@@ -10,13 +10,13 @@ export async function seed(knex: Knex): Promise<void> {
 
   const data: User[] = [
     {
-      name: 'Test Admin',
+      name: 'Admin 1',
       email: 'admin@elearning.com',
       password: await bcrypt.hash('rahasia', 10),
       role: 'admin',
     },
     {
-      name: 'Test Student',
+      name: 'Student 1',
       email: 'student@elearning.com',
       password: await bcrypt.hash('rahasia', 10),
       role: 'student',

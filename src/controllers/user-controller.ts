@@ -94,3 +94,55 @@ exports.deleteById = async (req: AuthenticatedRequest, res: Response) => {
     });
   }
 };
+
+// get user by ID -> admin only
+exports.getById = async (req: AuthenticatedRequest, res: Response) => {
+  const userId = Number(req.params.id);
+
+  try {
+    const user = await userService.findUserById(userId);
+    if (!user) {
+      return res.status(404).json({
+        statusCode: 404,
+        message: 'User tidak ditemukan!',
+      });
+    }
+
+    return res.status(200).json({
+      statusCode: 200,
+      message: 'Sukses mendapatkan user!',
+      data: user,
+    });
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json({
+      statusCode: 500,
+      message: 'Error internal server!',
+    });
+  }
+};
+
+// endpoint GET /api/users/me
+exports.getMe = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const user = await userService.findUserById(req.user.id);
+    if (!user) {
+      return res.status(404).json({
+        statusCode: 404,
+        message: 'User tidak ditemukan!',
+      });
+    }
+
+    return res.status(200).json({
+      statusCode: 200,
+      message: 'Sukses mendapatkan profil user!',
+      data: user,
+    });
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json({
+      statusCode: 500,
+      message: 'Error internal server!',
+    });
+  }
+};

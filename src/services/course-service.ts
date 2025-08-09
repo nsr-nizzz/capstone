@@ -2,6 +2,12 @@ import { Course } from '../models/course-model';
 
 const courseRepository = require('../repositories/course-repository');
 const filesystem = require('../utilities/filesystem');
+const userCourseRepository = require('../repositories/user-course-repository');
+
+// enrolled course
+exports.getEnrolledCourse = async (userId: number) => {
+  return await userCourseRepository.getEnrolledCoursesByUserId(userId);
+};
 
 // dapatkan semua kursus
 exports.getAllCourses = async (): Promise<Course[]> => {

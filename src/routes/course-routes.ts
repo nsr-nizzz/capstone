@@ -4,12 +4,12 @@ const authenticationMiddleware = require('../middlewares/authentication-middlewa
 const onlyAdminMiddleware = require('../middlewares/only-admin-middleware');
 const courseController = require('../controllers/course-controller');
 
-// // GET /api/courses/enrolled
-// router.get(
-//   '/enrolled',
-//   authenticationMiddleware,
-//   courseController.enrolledCourses,
-// );
+// GET /api/courses/enrolled
+router.get(
+    '/enrolled',
+    authenticationMiddleware,
+    courseController.enrolledCourses,
+);
 
 // GET /api/courses
 router.get('/', courseController.index);
